@@ -10,6 +10,9 @@ type Client struct {
 	name    string
 	passwd  string
 	baseURL *url.URL
+	
+	// API methods related to resources are seperated in different services.
+	Users *UsersService
 }
 
 // NewClient returns a new Crowd API client.
@@ -19,5 +22,7 @@ func NewClient(name, passwd, url string) (*Client, error) {
 		return nil, err
 	}
 
-	return &Client{name, passwd, baseURL}, nil
+	c := &Client{name, passwd, baseURL}
+	c.Users = &UsersService{client: c}
+	return c, nil
 }
