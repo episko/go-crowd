@@ -26,7 +26,8 @@ type Client struct {
 // NewClient returns a new Crowd API client.
 func NewClient(name, passwd, urlStr string) (*Client, error) {
 	// TODO: check user doesn't yet enter the api path
-	baseURL, err := url.Parse(urlStr + "/crowd/rest/usermanagement/latest")
+	urlStr += "crowd/rest/usermanagement/latest/"
+	baseURL, err := url.Parse(urlStr)
 	if err != nil {
 		return nil, err
 	}

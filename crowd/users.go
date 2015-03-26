@@ -26,7 +26,7 @@ type User struct {
 func (s *UsersService) Get(username string) (*User, error) {
 	v := url.Values{}
 	v.Set("username", username)
-	urlPath := "/user?" + v.Encode()
+	urlPath := "user?" + v.Encode()
 
 	req, err := s.client.NewRequest("GET", urlPath, nil)
 	if err != nil {
