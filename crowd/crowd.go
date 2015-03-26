@@ -7,7 +7,10 @@ import (
 	"io"
 	"net/http"
 	"net/url"
+	"errors"
 )
+
+var ErrUnauthorized = errors.New("Unauthorized")
 
 // A Client manages communication with Crowd API.
 type Client struct {
@@ -20,7 +23,8 @@ type Client struct {
 	baseURL *url.URL
 
 	// API methods related to resources are seperated in different services.
-	Users *UsersService
+	Users  *UsersService
+	Groups *GroupsService
 }
 
 // NewClient returns a new Crowd API client.
@@ -34,6 +38,7 @@ func NewClient(name, passwd, urlStr string) (*Client, error) {
 
 	c := &Client{client: http.DefaultClient, name: name, passwd: passwd, baseURL: baseURL}
 	c.Users = &UsersService{client: c}
+	c.Groups = &GroupsService{client: c}
 	return c, nil
 }
 

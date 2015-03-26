@@ -1,12 +1,9 @@
 package crowd
 
 import (
-	"errors"
 	"fmt"
 	"net/url"
 )
-
-var ErrUnauthorized = errors.New("Unauthorized")
 
 // UsersService handles communication with the user related methods.
 type UsersService struct {
@@ -23,9 +20,9 @@ type User struct {
 	Name        string `json:"name"`
 }
 
-func (s *UsersService) Get(username string) (*User, error) {
+func (s *UsersService) Get(name string) (*User, error) {
 	v := url.Values{}
-	v.Set("username", username)
+	v.Set("username", name)
 	urlPath := "user?" + v.Encode()
 
 	req, err := s.client.NewRequest("GET", urlPath, nil)
