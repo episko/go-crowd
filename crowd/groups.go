@@ -10,7 +10,7 @@ type GroupsService struct {
 	client *Client
 }
 
-// A User maps to a crowd user.
+// A Group maps to a crowd group.
 type Group struct {
 	Active      bool   `json:"active"`
 	Description string `json:"description"`
